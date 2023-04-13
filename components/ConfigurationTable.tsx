@@ -1,13 +1,18 @@
 import React from 'react';
 import ConfigurationRow from './ConfigurationRow';
 
-const ConfigurationTable = () => {
-  /*
-  const configurations = [
-    { id: 1, renameName: 'CX000X-', moveFolder: '/d/Downloads' },
-    { id: 2, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' }
-  ];
-  */
+type Configuration = {
+  id: number;
+  renameName: string;
+  moveFolder: string;
+};
+
+type ConfigurationTableProps = {
+  configurations: Configuration[];
+};
+
+const ConfigurationTable: React.FC<ConfigurationTableProps> = ({ configurations }) => {
+
   return (
     <table className="table table-striped table-bordered table-hover my-4">
       <thead>
@@ -18,8 +23,8 @@ const ConfigurationTable = () => {
         </tr>
       </thead>
       <tbody>
-        {configurations.map(config => (
-          <ConfigurationRow key={config.id} config={config} />
+          {configurations.map((configuration) => (
+          <ConfigurationRow key={configuration.id} configuration={configuration} />
         ))}
       </tbody>
     </table>
