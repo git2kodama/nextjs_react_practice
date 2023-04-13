@@ -1,9 +1,5 @@
 import React from 'react';
-type Configuration = {
-  id: number;
-  renameName: string;
-  moveFolder: string;
-};
+import { Configuration } from './ConfigurationsComponent';
 
 type ConfigurationRowProps = {
   configuration: Configuration;
@@ -11,16 +7,15 @@ type ConfigurationRowProps = {
 
 const ConfigurationRow: React.FC<ConfigurationRowProps> = ({ configuration }) => {
   return (
-    <tr>
-      <td>{configuration.id}</td>
-      <td>{configuration.renameName}</td>
-      <td>{configuration.moveFolder}</td>
-      <td>
-        <button className="btn btn-secondary btn-sm me-2">Edit</button>
-        <button className="btn btn-danger btn-sm">Delete</buttn>
-      </td>
-    </tr>
-  );
+      <tr>
+        <td>{configuration.renameName}</td>
+        <td>{configuration.moveFolder}</td>
+        <td>
+          <button className="btn btn-secondary btn-sm me-2">Edit</button>
+          <button className="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+   );
 };
 
 export default ConfigurationRow;

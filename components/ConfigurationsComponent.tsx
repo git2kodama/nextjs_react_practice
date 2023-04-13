@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-
-type Configuration = {
+export type Configuration = {
   id: number;
   renameName: string;
   moveFolder: string;

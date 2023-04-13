@@ -1,11 +1,6 @@
 import React from 'react';
 import ConfigurationRow from './ConfigurationRow';
-
-type Configuration = {
-  id: number;
-  renameName: string;
-  moveFolder: string;
-};
+import { Configuration } from './ConfigurationsComponent';
 
 type ConfigurationTableProps = {
   configurations: Configuration[];
@@ -23,7 +18,7 @@ const ConfigurationTable: React.FC<ConfigurationTableProps> = ({ configurations 
         </tr>
       </thead>
       <tbody>
-          {configurations.map((configuration) => (
+        {configurations.map((configuration) => (
           <ConfigurationRow key={configuration.id} configuration={configuration} />
         ))}
       </tbody>
