@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-// 型定義
+
 type Configuration = {
   id: number;
   renameName: string;
   moveFolder: string;
 };
 
-const initialConfigurations: Configuration[] = [
-  { id: 1, renameName: 'CX000X-', moveFolder: '/d/Downloads' },
-  { id: 2, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' },
-];
+type ConfigurationsComponentProps = {
+  configurations: Configuration[];
+  setConfigurations: Dispatch<SetStateAction<Configuration[]>>;
+};
 
-const ConfigurationsComponent: React.FC = () => {
 
-  const [configurations, setConfigurations] = useState<Configuration[]>(initialConfigurations);
+const ConfigurationsComponent: React.FC<ConfigurationsComponentProps> = ({ configurations, setConfigurations }) => {
 
+ /* 
   // 設定の追加
   const addConfiguration = (newConfiguration: Configuration) => {
     setConfigurations([...configurations, newConfiguration]);
@@ -34,7 +34,7 @@ const ConfigurationsComponent: React.FC = () => {
       ),
     );
   };
-
+*/
   // ... 他のコンポーネントやロジック
   return (
     <div>

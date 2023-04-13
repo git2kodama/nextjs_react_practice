@@ -2,12 +2,12 @@ import React from 'react';
 import ConfigurationRow from './ConfigurationRow';
 
 const ConfigurationTable = () => {
-  // 設定データを渡す
+  /*
   const configurations = [
     { id: 1, renameName: 'CX000X-', moveFolder: '/d/Downloads' },
     { id: 2, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' }
   ];
-
+  */
   return (
     <table className="table table-striped table-bordered table-hover my-4">
       <thead>
