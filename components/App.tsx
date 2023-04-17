@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import ConfigurationForm from './ConfigurationForm';
 import ConfigurationTable from './ConfigurationTable';
 import ImportExportButtons from './ImportExportButtons';
-import ConfigurationsComponent from './ConfigurationsComponent';
+import { ConfigurationsProvider} from './ConfigurationsComponent';
 
 // 型定義
 type Configuration = {
@@ -23,10 +23,11 @@ const App: React.FC = () => {
   return (
     <div className="container">
       <h1 className="my-4">JSON Configuration App</h1>
-      <ConfigurationsComponent configurations = {configurations} setConfigurations = {setConfigurations} />
-      <ConfigurationForm />
-      <ConfigurationTable  configurations = {configurations} />
-      <ImportExportButtons />
+      <ConfigurationsProvider>
+        <ConfigurationForm configurations={configurations} />
+        <ConfigurationTable configurations={configurations} />
+        <ImportExportButtons />
+      </ConfigurationsProvider>
     </div>
   );
 };

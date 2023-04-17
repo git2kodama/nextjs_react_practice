@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
 
 export type Configuration = {
   id: number;
@@ -6,26 +6,31 @@ export type Configuration = {
   moveFolder: string;
 };
 
-type ConfigurationsComponentProps = {
+type ConfigurationsContextType = {
   configurations: Configuration[];
   setConfigurations: Dispatch<SetStateAction<Configuration[]>>;
+  addConfiguration: (newConfiguration: Configuration) => void;
+  deleteConfiguration: (id: number) => void;
+  updateConfiguration: (updatedConfiguration: Configuration) => void;
 };
 
+const ConfigurationsContext = createContext<ConfigurationsContextType | undefined>(undefined);
 
-const ConfigurationsComponent: React.FC<ConfigurationsComponentProps> = ({ configurations, setConfigurations }) => {
+type ConfigurationsProviderProps = {
+  children: React.ReactNode;
+};
 
- /* 
-  // 設定の追加
+const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ children }) => {
+  const [configurations, setConfigurations] = useState<Configuration[]>([]);
+
   const addConfiguration = (newConfiguration: Configuration) => {
     setConfigurations([...configurations, newConfiguration]);
   };
 
-  // 設定の削除
   const deleteConfiguration = (id: number) => {
     setConfigurations(configurations.filter((configuration) => configuration.id !== id));
   };
 
-  // 設定の更新
   const updateConfiguration = (updatedConfiguration: Configuration) => {
     setConfigurations(
       configurations.map((configuration) =>
@@ -33,12 +38,14 @@ const ConfigurationsComponent: React.FC<ConfigurationsComponentProps> = ({ confi
       ),
     );
   };
-*/
-  // ... 他のコンポーネントやロジック
+
   return (
-    <div>
-    </div>
+    <ConfigurationsContext.Provider
+      value={{ configurations, setConfigurations, addConfiguration, deleteConfiguration, updateConfiguration }}
+    >
+      {children}
+    </ConfigurationsContext.Provider>
   );
 };
 
-export default ConfigurationsComponent;
+export { ConfigurationsProvider, ConfigurationsContext };
