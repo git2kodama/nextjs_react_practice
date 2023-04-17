@@ -7,8 +7,8 @@ export type Configuration = {
 };
 
 const initialConfigurations: Configuration[] = [
-  { id: 1, renameName: 'CX000X-', moveFolder: '/d/Downloads' },
-  { id: 2, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' },
+  { id: 0, renameName: 'CX000X-', moveFolder: '/d/Downloads' },
+  { id: 1, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' },
 ];
 
 type ConfigurationsContextType = {
@@ -37,9 +37,10 @@ type ConfigurationsProviderProps = {
 
 const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ children }) => {
   const [configurations, setConfigurations] = useState<Configuration[]>(initialConfigurations);
-  const [idCounter, setIdCounter] = useState<number>(1);
+  const [idCounter, setIdCounter] = useState<number>(configurations.length);
 
   const addConfiguration = (newConfiguration: Configuration) => {
+    console.log("id : "+newConfiguration.id);
     setConfigurations([...configurations, newConfiguration]);
     setIdCounter(idCounter +1);
   };
