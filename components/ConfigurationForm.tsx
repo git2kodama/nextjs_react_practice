@@ -14,10 +14,10 @@ const ConfigurationForm: React.FC = () => {
   }
   const { configurations } = context;
   const { addConfiguration } = context;
+  const { idCounter } = context;
 
   const handleAddConfiguration = () => {
-    console.log(configurations.length);
-    const newConfiguration:  Configuration = { id: configurations.length+1, renameName: newRenameName, moveFolder: newMoveFolder };
+    const newConfiguration:  Configuration = { id: idCounter, renameName: newRenameName, moveFolder: newMoveFolder };
     addConfiguration(newConfiguration);
     // 入力フィールドをクリア
     setNewRenameName('');
