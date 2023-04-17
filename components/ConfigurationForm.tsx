@@ -1,20 +1,20 @@
-import React, { useState,useContext } from 'react';
-import { ConfigurationsContext,Configuration } from './ConfigurationsComponent';
+import React, { useState } from 'react';
+import { useConfigurationsContext,Configuration } from './ConfigurationsComponent';
 import { config } from 'process';
 
-type ConfigurationFormProps = {
-  configurations: Configuration[];
-};
-
-const ConfigurationForm: React.FC<ConfigurationFormProps> = ({ configurations }) => {
+const ConfigurationForm: React.FC = () => {
 
   const [newRenameName, setNewRenameName] = useState('');
   const [newMoveFolder, setNewMoveFolder] = useState('');
-  const context = useContext(ConfigurationsContext);
+  
+  const context = useConfigurationsContext();
+  
   if (!context) {
     throw new Error('このコンポーネントは ConfigurationsProvider 内で使用する必要があります');
   }
+  const { configurations } = context;
   const { addConfiguration } = context;
+
   const handleAddConfiguration = () => {
     console.log(configurations.length);
     const newConfiguration:  Configuration = { id: configurations.length+1, renameName: newRenameName, moveFolder: newMoveFolder };

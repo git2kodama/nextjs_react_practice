@@ -1,13 +1,11 @@
 import React from 'react';
 import ConfigurationRow from './ConfigurationRow';
-import { Configuration } from './ConfigurationsComponent';
+import { useConfigurationsContext } from './ConfigurationsComponent';
 
-type ConfigurationTableProps = {
-  configurations: Configuration[];
-};
 
-const ConfigurationTable: React.FC<ConfigurationTableProps> = ({ configurations }) => {
-
+const ConfigurationTable: React.FC = () => {
+  const { configurations } = useConfigurationsContext();
+  
   return (
     <table className="table table-striped table-bordered table-hover my-4">
       <thead>
