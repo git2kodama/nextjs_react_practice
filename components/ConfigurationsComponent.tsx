@@ -1,4 +1,4 @@
-import React, { createContext, useState, Dispatch, SetStateAction,useContext } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction,useContext, use } from 'react';
 
 export type Configuration = {
   id: number;
@@ -14,6 +14,7 @@ const initialConfigurations: Configuration[] = [
 type ConfigurationsContextType = {
   configurations: Configuration[];
   idCounter: number;
+  bEditMode: boolean;
   setConfigurations: Dispatch<SetStateAction<Configuration[]>>;
   addConfiguration: (newConfiguration: Configuration) => void;
   deleteConfiguration: (id: number) => void;
@@ -38,6 +39,7 @@ type ConfigurationsProviderProps = {
 const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ children }) => {
   const [configurations, setConfigurations] = useState<Configuration[]>(initialConfigurations);
   const [idCounter, setIdCounter] = useState<number>(configurations.length);
+  const [bEditMode, setEditMode] = useState<boolean>(false);
 
   const addConfiguration = (newConfiguration: Configuration) => {
     console.log("id : "+newConfiguration.id);
@@ -55,12 +57,11 @@ const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ childre
         configuration.id === updatedConfiguration.id ? updatedConfiguration : configuration,
       ),
     );
+    setEditMode(false);
   };
 
   return (
-    <ConfigurationsContext.Provider
-      value={{ configurations, idCounter, setConfigurations, addConfiguration, deleteConfiguration, updateConfiguration }}
-    >
+    <ConfigurationsContext.Provider value={{ configurations, idCounter,bEditMode, setConfigurations, addConfiguration, deleteConfiguration, updateConfiguration }}>
       {children}
     </ConfigurationsContext.Provider>
   );

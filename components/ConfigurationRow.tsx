@@ -7,18 +7,23 @@ type ConfigurationRowProps = {
 
 const ConfigurationRow: React.FC<ConfigurationRowProps> = ({ configuration }) => {
   const {deleteConfiguration} = useConfigurationsContext();
+  const {bEditMode} = useConfigurationsContext(); 
 
   const handleDelConfiguration = () => {
     deleteConfiguration(configuration.id);
   }
+  const handleEditConfiguration = () => {
 
-  return (
+  }
+  return ( 
       <tr>
         <td>{configuration.renameName}</td>
         <td>{configuration.moveFolder}</td>
         <td>
-          <button className="btn btn-secondary btn-sm me-2">Edit</button>
-          <button className="btn btn-danger btn-sm"onClick={handleDelConfiguration}>Delete</button>
+          <>
+            <button className="btn btn-secondary btn-sm me-2" onClick={handleEditConfiguration} disabled={bEditMode}>Edit</button>
+            <button className="btn btn-danger btn-sm" onClick={handleDelConfiguration} disabled={bEditMode}>Delete</button>
+          </>
         </td>
       </tr>
    );
