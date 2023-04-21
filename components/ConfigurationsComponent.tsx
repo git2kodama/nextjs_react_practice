@@ -11,10 +11,13 @@ const initialConfigurations: Configuration[] = [
   { id: 1, renameName: 'JAV-TEST', moveFolder: '/d/Downloads' },
 ];
 
-type ConfigurationsContextType = {
+type ConfigurationsContextType = { 
   configurations: Configuration[];
   idCounter: number;
   bEditMode: boolean;
+  nowConfiguration: Configuration;
+  setNowConfiguration: (nc: Configuration) => void;
+  setEditMode: (nowEditMode: boolean) => void;
   setConfigurations: Dispatch<SetStateAction<Configuration[]>>;
   addConfiguration: (newConfiguration: Configuration) => void;
   deleteConfiguration: (id: number) => void;
@@ -40,6 +43,7 @@ const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ childre
   const [configurations, setConfigurations] = useState<Configuration[]>(initialConfigurations);
   const [idCounter, setIdCounter] = useState<number>(configurations.length);
   const [bEditMode, setEditMode] = useState<boolean>(false);
+  const [nowConfiguration,setNowConfiguration] = useState<Configuration>(initialConfigurations[0]);
 
   const addConfiguration = (newConfiguration: Configuration) => {
     console.log("id : "+newConfiguration.id);
@@ -61,7 +65,7 @@ const ConfigurationsProvider: React.FC<ConfigurationsProviderProps> = ({ childre
   };
 
   return (
-    <ConfigurationsContext.Provider value={{ configurations, idCounter,bEditMode, setConfigurations, addConfiguration, deleteConfiguration, updateConfiguration }}>
+    <ConfigurationsContext.Provider value={{ configurations, idCounter, bEditMode, nowConfiguration,setNowConfiguration, setEditMode,setConfigurations, addConfiguration, deleteConfiguration, updateConfiguration }}>
       {children}
     </ConfigurationsContext.Provider>
   );

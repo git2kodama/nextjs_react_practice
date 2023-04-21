@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Configuration,useConfigurationsContext } from './ConfigurationsComponent';
 
 type ConfigurationRowProps = {
@@ -8,12 +8,15 @@ type ConfigurationRowProps = {
 const ConfigurationRow: React.FC<ConfigurationRowProps> = ({ configuration }) => {
   const {deleteConfiguration} = useConfigurationsContext();
   const {bEditMode} = useConfigurationsContext(); 
+  const {setEditMode} = useConfigurationsContext();
+  const {setNowConfiguration} = useConfigurationsContext();
 
   const handleDelConfiguration = () => {
     deleteConfiguration(configuration.id);
   }
   const handleEditConfiguration = () => {
-
+    setNowConfiguration(configuration);
+    setEditMode(true);
   }
   return ( 
       <tr>
